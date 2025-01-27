@@ -29,7 +29,7 @@ const CategoryFilter = (props) => {
             props.active === -1 ? styles.active : styles.inactive,
           ]}
         >
-          <Text style={styles.badgeText}>Dummy Name 1</Text>
+          <Text style={styles.badgeText}>All</Text>
         </View>
       </TouchableOpacity>
 

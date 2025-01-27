@@ -52,26 +52,28 @@ const SearchedProduct = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: width,
-    paddingHorizontal: 10,
+    padding: 10, // Add spacing
+    backgroundColor: "#f9f9f9", // Light background for contrast
   },
   productContainer: {
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",
-    paddingVertical: 10,
+    paddingVertical: 15, // Add vertical spacing
   },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 30, // Fully circular
+    marginRight: 15,
+    backgroundColor: "#eaeaea", // Placeholder background
   },
   productDetails: {
     flex: 1,
   },
   productName: {
-    fontWeight: "bold",
+    fontWeight: "600",
     fontSize: 16,
     marginBottom: 5,
   },
