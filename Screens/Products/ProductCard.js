@@ -42,7 +42,7 @@ const ProductCard = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: width / 2 - 20,
-    height: width / 1.7,
+    height: width / 1.9,
     padding: 10,
     borderRadius: 10,
     marginTop: 55,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: width / 2 - 20 - 10,
-    height: width / 2 - 20 - 30,
+    height: width / 2 - 20 - 50,
     backgroundColor: "transparent",
     position: "absolute",
     top: -45,

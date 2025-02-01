@@ -6,28 +6,35 @@ import {
   Text,
   Image,
   FlatList,
+  TouchableOpacity,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
 
 const SearchedProduct = (props) => {
-  const { productsFiltered } = props;
+  const { productsFiltered, navigation } = props;
 
   const renderItem = ({ item }) => (
-    <View style={styles.productContainer}>
-      <Image
-        style={styles.avatar}
-        source={{
-          uri: item.image
-            ? item.image
-            : "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-        }}
-      />
-      <View style={styles.productDetails}>
-        <Text style={styles.productName}>{item.name}</Text>
-        <Text style={styles.productDescription}>{item.description}</Text>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Product Detail", { item: item });
+      }}
+    >
+      <View style={styles.productContainer}>
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: item.image
+              ? item.image
+              : "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+          }}
+        />
+        <View style={styles.productDetails}>
+          <Text style={styles.productName}>{item.name}</Text>
+          <Text style={styles.productDescription}>{item.description}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -52,22 +59,22 @@ const SearchedProduct = (props) => {
 const styles = StyleSheet.create({
   container: {
     width: width,
-    padding: 10, // Add spacing
-    backgroundColor: "#f9f9f9", // Light background for contrast
+    padding: 10,
+    backgroundColor: "#f9f9f9",
   },
   productContainer: {
     flexDirection: "row",
     alignItems: "center",
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",
-    paddingVertical: 15, // Add vertical spacing
+    paddingVertical: 15,
   },
   avatar: {
     width: 60,
     height: 60,
-    borderRadius: 30, // Fully circular
+    borderRadius: 30,
     marginRight: 15,
-    backgroundColor: "#eaeaea", // Placeholder background
+    backgroundColor: "#eaeaea",
   },
   productDetails: {
     flex: 1,

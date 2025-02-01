@@ -8,7 +8,12 @@ const ProductList = (props) => {
   const { item } = props;
 
   return (
-    <TouchableOpacity style={styles.touchableContainer}>
+    <TouchableOpacity
+      style={styles.touchableContainer}
+      onPress={() =>
+        props.navigation.navigate("Product Detail", { item: item })
+      }
+    >
       <View style={styles.cardContainer}>
         <ProductCard {...item} />
       </View>
