@@ -1,12 +1,9 @@
 import { legacy_createStore as createStore, combineReducers } from "redux";
-import cartItems from "./Reducers/cartItem"; // Ensure this path is correct
+import cartItems from "./Reducers/cartItem"; // ✅ Ensure correct path
 
-// Combine reducers
 const reducers = combineReducers({
-  cartItems,
+  cartItems: cartItems, // ✅ Match this with mapStateToProps in Cart.js
 });
 
-// Create Redux store without any middleware or DevTools
-const store = createStore(reducers);
-
+const store = createStore(reducers); // ✅ No middleware, plain Redux store
 export default store;

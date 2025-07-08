@@ -8,7 +8,6 @@ import {
   FlatList,
 } from "react-native";
 import { connect } from "react-redux";
-import cartItems from "../../Redux/Reducers/cartItem";
 
 var { height, width } = Dimensions.get("window");
 
@@ -94,11 +93,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state) => {
-  const { cartItems } = state;
-  return {
-    cartItems: cartItems,
-  };
-};
+const mapStateToProps = (state) => ({
+  cartItems: state.cart ? state.cart.cartItems : [], // ✅ Safe fallback
+});
 
 export default connect(mapStateToProps, null)(Cart);

@@ -1,21 +1,34 @@
-import { ADD_TO_CART, CLEAR_CART, REMOVE_FROM_CART } from "../constants";
+import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from "../constants";
 
-export const addToCart = (payload) => {
-  return {
+export const addToCart = (product) => (dispatch) => {
+  if (!product || !product._id) {
+    console.error(
+      "addToCart Error: Product data is missing or invalid",
+      product
+    );
+    return;
+  }
+
+  console.log("Adding product to cart:", product); // ✅ Debugging
+
+  dispatch({
     type: ADD_TO_CART,
-    payload,
-  };
+    payload: {
+      product,
+      quantity: 1,
+    },
+  });
 };
 
-export const removeFromCart = (payload) => {
-  return {
+export const removeFromCart = (product) => (dispatch) => {
+  dispatch({
     type: REMOVE_FROM_CART,
-    payload,
-  };
+    payload: product,
+  });
 };
 
-export const clearCart = () => {
-  return {
+export const clearCart = () => (dispatch) => {
+  dispatch({
     type: CLEAR_CART,
-  };
+  });
 };

@@ -51,10 +51,17 @@ const ProductCard = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addItemToCart: (product) => {
-      dispatch(actions.addToCart({ quantity: 1, product }));
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          product,
+          quantity: 1,
+        },
+      });
     },
   };
 };
+
 const styles = StyleSheet.create({
   container: {
     width: width / 2 - 20,
