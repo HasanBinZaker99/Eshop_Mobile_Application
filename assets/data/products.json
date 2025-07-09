@@ -19,7 +19,7 @@
   },
   {
     "_id": {
-      "$oid": "53455dfgfdgdgdgdgd"
+      "$oid": "53455dfgfdsdfsfgdgdgdgd"
     },
     "image": "https://www.cookerru.com/wp-content/uploads/2022/06/mapo-tofu-recipe-preview-feature-1024x1024.jpg",
     "brand": "PS3",
@@ -37,7 +37,7 @@
   },
   {
     "_id": {
-      "$oid": "5345353dfgdfdgfdgdd"
+      "$oid": "5353dfgsdfsfdfdgfdgdd"
     },
     "image": "https://cafedelites.com/wp-content/uploads/2018/04/Best-Kung-Pao-Chicken-IMAGE-2.jpg",
     "brand": "PS3",
@@ -91,7 +91,7 @@
   },
   {
     "_id": {
-      "$oid": "5f15d8852a025143f9593a7c"
+      "$oid": "5f15d8852fffa025143f9593a7c"
     },
     "image": "https://www.pngitem.com/pimgs/b/76-762464_png-ipad.png",
     "brand": "PS3",
@@ -156,7 +156,7 @@
     "name": "FIFA 20",
     "description": "The most hard FIFA ever",
     "category": {
-      "$oid": "5f15d5cdcb4a6642bddc0fe9"
+      "$oid": "5f15ddsfsdb4a6642bddc0fe9"
     },
     "countInStock": 25,
     "__v": 0

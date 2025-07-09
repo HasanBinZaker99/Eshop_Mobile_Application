@@ -1,9 +1,14 @@
-import { legacy_createStore as createStore, combineReducers } from "redux";
+import {
+  legacy_createStore as createStore,
+  combineReducers,
+  applyMiddleware,
+} from "redux";
+import thunk from "redux-thunk";
 import cartItems from "./Reducers/cartItem"; // ✅ Ensure correct path
 
-const reducers = combineReducers({
-  cartItems: cartItems, // ✅ Match this with mapStateToProps in Cart.js
+const rootReducer = combineReducers({
+  cartItems,
 });
 
-const store = createStore(reducers); // ✅ No middleware, plain Redux store
+const store = createStore(rootReducer, applyMiddleware(thunk)); // ✅ No middleware, plain Redux store
 export default store;
