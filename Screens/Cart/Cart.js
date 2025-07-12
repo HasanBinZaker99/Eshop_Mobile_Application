@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Dimensions,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, Button, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import CartItem from "./CartItem";
 import * as actions from "../../Redux/Actions/cartActions";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Ionicons } from "@expo/vector-icons";
-
-const { height } = Dimensions.get("window");
+import styles from "../../styles/Carts/CartStyle";
 
 const Cart = (props) => {
   const [cartItems, setCartItems] = useState(props.cartItems);
@@ -106,65 +98,5 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
   };
 };
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: "white",
-  },
-  cartContent: {
-    flex: 1,
-    padding: 20,
-  },
-  cartTitle: {
-    alignSelf: "center",
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  bottomContainer: {
-    borderTopWidth: 1,
-    borderColor: "#ccc",
-    backgroundColor: "#fff",
-    padding: 15,
-  },
-  bottomRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  productPrice: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "green",
-  },
-  empty: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  rowBack: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    marginBottom: 10,
-    overflow: "hidden",
-  },
-  deleteButton: {
-    width: 75,
-    backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  deleteButton: {
-    width: 75,
-    height: "100%",
-    backgroundColor: "red",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

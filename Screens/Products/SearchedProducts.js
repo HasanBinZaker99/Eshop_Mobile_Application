@@ -2,14 +2,12 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  Dimensions,
   Text,
   Image,
   FlatList,
   TouchableOpacity,
 } from "react-native";
-
-const { width } = Dimensions.get("window");
+import styles from "../../styles/products/SearchedProductsStyle";
 
 const SearchedProduct = (props) => {
   const { productsFiltered, navigation } = props;
@@ -55,48 +53,5 @@ const SearchedProduct = (props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: width,
-    padding: 10,
-    backgroundColor: "#f9f9f9",
-  },
-  productContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
-    paddingVertical: 15,
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 15,
-    backgroundColor: "#eaeaea",
-  },
-  productDetails: {
-    flex: 1,
-  },
-  productName: {
-    fontWeight: "600",
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  productDescription: {
-    color: "#757575",
-    fontSize: 14,
-  },
-  center: {
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  noProductText: {
-    fontSize: 16,
-    color: "#757575",
-  },
-});
 
 export default SearchedProduct;

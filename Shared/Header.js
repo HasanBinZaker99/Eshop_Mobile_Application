@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Image, SafeAreaView, View } from "react-native";
+import { Image, SafeAreaView, View } from "react-native";
+import styles from "../styles/Shared/HeaderStyle";
 
 const AppHeader = () => {
   return (
@@ -12,14 +13,5 @@ const AppHeader = () => {
     </SafeAreaView>
   );
 };
-const styles = StyleSheet.create({
-  AppHeader: {
-    width: "100%",
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-});
 
 export default AppHeader;

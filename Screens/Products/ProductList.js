@@ -1,8 +1,7 @@
 import React from "react";
-import { TouchableOpacity, View, StyleSheet, Dimensions } from "react-native";
+import { TouchableOpacity, View, StyleSheet } from "react-native";
 import ProductCard from "./ProductCard";
-
-const { width } = Dimensions.get("window");
+import styles from "../../styles/products/ProductListStyle";
 
 const ProductList = (props) => {
   const { item } = props;
@@ -20,19 +19,5 @@ const ProductList = (props) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  touchableContainer: {
-    width: "50%",
-    padding: 10, // Add spacing between cards
-  },
-  cardContainer: {
-    width: width / 2 - 20, // Adjust width to include padding
-    backgroundColor: "#fff", // Add a clean background
-    borderRadius: 10, // Round corners
-    overflow: "hidden", // Clip content to the rounded corners
-    elevation: 2, // Add shadow for depth
-  },
-});
 
 export default ProductList;
