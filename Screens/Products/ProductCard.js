@@ -12,7 +12,6 @@ import styles from "../../styles/products/ProductCardStyle";
 var { width } = Dimensions.get("window");
 
 const ProductCard = (props) => {
-  //console.log("ProductCard Props:", props);
   const { name, price, image, countInStock } = props;
   return (
     <View style={styles.container}>
@@ -36,7 +35,7 @@ const ProductCard = (props) => {
             title={"Add"}
             color={"green"}
             onPress={() => {
-              props.addItemToCart(props);
+              props.addItemToCart({ ...props });
             }}
           />
         </View>

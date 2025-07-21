@@ -9,8 +9,6 @@ export const addToCart = (product) => (dispatch) => {
     return;
   }
 
-  console.log("Adding product to cart:", product); // ✅ Debugging
-
   dispatch({
     type: ADD_TO_CART,
     payload: {

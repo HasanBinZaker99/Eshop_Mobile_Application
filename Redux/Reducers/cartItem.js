@@ -1,6 +1,8 @@
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from "../constants";
 
 const cartItems = (state = [], action) => {
+  // state — the current cart items (array)
+
   switch (action.type) {
     case ADD_TO_CART:
       const existingItem = state.find(
