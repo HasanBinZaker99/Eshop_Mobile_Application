@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
-  Picker,
 } from "react-native";
-
+import { Picker } from "@react-native-picker/picker";
 const methods = [
   { name: "Cash on Delivery", value: 1 },
   { name: "Bank Transfer", value: 2 },
