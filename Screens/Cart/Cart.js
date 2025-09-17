@@ -1,97 +1,135 @@
-import React, { useEffect, useState } from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
-import { connect } from "react-redux";
-import CartItem from "./CartItem";
-import * as actions from "../../Redux/Actions/cartActions";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
-import { Ionicons } from "@expo/vector-icons";
-import styles from "../../styles/Carts/CartStyle";
+import Icon from "react-native-vector-icons/FontAwesome";
+import CartItem from "./CartItem";
+import { connect } from "react-redux";
+import * as actions from "../../Redux/Actions/cartActions";
+import {
+  Box,
+  Text,
+  Heading,
+  VStack,
+  Center,
+  HStack,
+  Image,
+  Button,
+  ButtonText,
+  ScrollView,
+} from "@gluestack-ui/themed";
+var { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
-  const [cartItems, setCartItems] = useState(props.cartItems);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    setCartItems(props.cartItems);
-
-    let newTotal = 0;
-    props.cartItems.forEach((cart) => {
-      newTotal += cart.product.price;
-    });
-    setTotal(newTotal);
-  }, [props.cartItems]);
-
-  const handleDelete = (productId) => {
-    props.removeFromCart({ product: { _id: productId } });
+  var total = 0;
+  props.cartItems.forEach((cart) => {
+    total += cart.product.price;
+  });
+  const hasItems = props.cartItems && props.cartItems.length > 0;
+  const confirmRemove = (item) => {
+    const name = item?.product?.name ?? "this item";
+    Alert.alert(
+      "Remove item?",
+      `Do you want to remove ${name} from the cart?`,
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Remove",
+          style: "destructive",
+          onPress: () => props.removeFromCart(item), // works with your current reducer
+          // If your other version uses only the id:
+          // onPress: () => props.removeFromCart({ product: { _id: item.product._id } }),
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
-  const renderHiddenItem = (data) => (
-    <View style={styles.rowBack}>
-      <TouchableOpacity
-        style={styles.deleteButton}
-        onPress={() => handleDelete(data.item.product._id)}
-      >
-        <Ionicons name="trash" color="white" size={24} />
-      </TouchableOpacity>
-    </View>
-  );
-
   return (
-    <View style={styles.wrapper}>
-      {cartItems && cartItems.length > 0 ? (
+    <Box flex={1} bg="white">
+      {hasItems ? (
         <>
-          <View style={styles.cartContent}>
-            <Text style={styles.cartTitle}>Cart</Text>
+          <SwipeListView
+            contentContainerStyle={{
+              paddingHorizontal: 8,
+              paddingVertical: 12,
+            }}
+            data={props.cartItems}
+            renderItem={({ item }) => <CartItem item={item} />}
+            renderHiddenItem={(data) => (
+              <View style={styles.hiddenContainer}>
+                <TouchableOpacity
+                  style={styles.hiddenButton}
+                  onPress={() => confirmRemove(data.item)}
+                >
+                  <Icon name="trash" color={"red"} size={24} />
+                </TouchableOpacity>
+              </View>
+            )}
+            disableRightSwipe={true}
+            previewOpenDelay={3000}
+            friction={1000}
+            tension={40}
+            leftOpenValue={75}
+            stopLeftSwipe={75}
+            rightOpenValue={-75}
+          />
 
-            <SwipeListView
-              data={cartItems}
-              keyExtractor={(item) => item.product._id}
-              renderItem={({ item }) => <CartItem item={item} />}
-              renderHiddenItem={renderHiddenItem}
-              leftOpenValue={75} // Left swipe
-              rightOpenValue={-75} // Right swipe
-              stopLeftSwipe={75}
-              stopRightSwipe={-75}
-              previewOpenDelay={3000}
-              friction={1000}
-              tension={40}
-            />
-          </View>
+          <HStack
+            justifyContent="space-between"
+            alignItems="center"
+            bg="$backgroundLight100"
+            p="$4"
+            borderTopWidth={1}
+            borderColor="$borderLight300"
+            mt="$4"
+          >
+            <Text fontSize="$lg" fontWeight="bold" color="$textDark900">
+              ${total}
+            </Text>
 
-          <View style={styles.bottomContainer}>
-            <View style={styles.bottomRow}>
-              <Text style={styles.productPrice}>
-                Total: ${total.toFixed(2)}
-              </Text>
-              <Button
-                title="Clear"
-                color="red"
-                onPress={() => props.clearCart()}
-              />
-              <Button
-                title="Checkout"
-                color="green"
-                onPress={() => props.navigation.navigate("Checkout")}
-              />
-            </View>
-          </View>
+            <Button
+              size="md"
+              variant="outline"
+              action="secondary"
+              onPress={() => props.clearCart()}
+            >
+              <ButtonText>Clear</ButtonText>
+            </Button>
+
+            <Button
+              size="md"
+              action="primary"
+              onPress={() => props.navigation.navigate("Checkout")}
+            >
+              <ButtonText>Checkout</ButtonText>
+            </Button>
+          </HStack>
         </>
       ) : (
-        <View style={styles.empty}>
-          <Text>Looks like your cart is empty</Text>
-          <Text>Add products to your cart</Text>
-        </View>
+        <Center flex={1} px="$6">
+          <VStack space="sm" alignItems="center">
+            <Heading size="lg">Your cart is empty</Heading>
+            <Text textAlign="center" color="$textLight500">
+              Add products to your cart to get started
+            </Text>
+          </VStack>
+        </Center>
       )}
-    </View>
+    </Box>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    cartItems: state.cartItems,
+    cartItems: state.cartItemsFromRedux,
   };
 };
-
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(actions.clearCart()),
@@ -99,4 +137,22 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const styles = StyleSheet.create({
+  hiddenContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginBottom: 10,
+    overflow: "hidden",
+  },
+  hiddenButton: {
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingRight: 25,
+    height: "100%",
+    width: 70,
+  },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

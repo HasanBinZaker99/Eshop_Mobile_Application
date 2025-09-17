@@ -1,25 +1,46 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import styles from "../../styles/Carts/CartItemStyle";
+import React, { useState } from "react";
+import { Image as RNImage } from "react-native";
+import {
+  Box,
+  Text,
+  Heading,
+  VStack,
+  Center,
+  HStack,
+  Image,
+  Button,
+  ButtonText,
+  ScrollView,
+} from "@gluestack-ui/themed";
 
-const CartItem = ({ item }) => {
-  const data = item.product;
-
+const CartItem = (props) => {
+  const data = props.item;
+  const product = data.product;
+  console.log(product);
   return (
-    <View style={styles.listItem}>
+    <HStack
+      bg="white"
+      p="$3"
+      my="$.2"
+      borderBottomWidth={1}
+      borderBottomColor="$trueGray300"
+      alignItems="center"
+      space="md"
+    >
       <Image
         source={{
-          uri: data.image
-            ? data.image
-            : "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
+          uri: product.image
+            ? product.image
+            : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png",
         }}
-        style={styles.thumbnail}
+        alt="product"
+        width={60}
+        height={60}
       />
-      <View style={styles.itemInfo}>
-        <Text style={styles.productName}>{data.name}</Text>
-      </View>
-      <Text style={styles.productPrice}>${data.price}</Text>
-    </View>
+      <Text fontWeight="bold">{product.name}</Text>
+      <Box flex={1} />
+      <Text color="$textLight900">${product.price}</Text>
+    </HStack>
   );
 };
 

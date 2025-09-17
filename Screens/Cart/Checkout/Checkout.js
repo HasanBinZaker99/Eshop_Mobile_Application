@@ -1,4 +1,3 @@
-// Checkout.js
 import React, { useEffect, useState, useContext } from "react";
 import {
   Text,
@@ -203,7 +202,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   formCard: {
-    backgroundColor: BG, // inputs float on grey background (like screenshot)
+    backgroundColor: BG,
     paddingHorizontal: 16,
   },
   input: {

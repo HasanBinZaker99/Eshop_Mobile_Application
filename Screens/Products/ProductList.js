@@ -5,7 +5,6 @@ import styles from "../../styles/products/ProductListStyle";
 
 const ProductList = (props) => {
   const { item } = props;
-
   return (
     <TouchableOpacity
       style={styles.touchableContainer}

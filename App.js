@@ -1,29 +1,36 @@
+import React from "react";
 import { LogBox } from "react-native";
 
-import ProductContainer from "./Screens/Products/ProductContainer";
 import AppHeader from "./Shared/Header";
-import { NavigationContainer } from "@react-navigation/native";
 import Main from "./Navigators/Main";
+import { NavigationContainer } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 
 // Redux
 import { Provider } from "react-redux";
 import store from "./Redux/store";
+
 // Context API
 import Auth from "./Context/store/Auth";
 
-// Navigatiors
+// ✅ Gluestack UI (official packages)
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
 
 LogBox.ignoreAllLogs(true);
+
 export default function App() {
   return (
-    <Auth>
+    <GluestackUIProvider config={config}>
       <Provider store={store}>
-        <NavigationContainer>
-          <AppHeader />
-          <Main />
-        </NavigationContainer>
+        <Auth>
+          <NavigationContainer>
+            <AppHeader />
+            <Main />
+            <Toast />
+          </NavigationContainer>
+        </Auth>
       </Provider>
-    </Auth>
+    </GluestackUIProvider>
   );
 }
