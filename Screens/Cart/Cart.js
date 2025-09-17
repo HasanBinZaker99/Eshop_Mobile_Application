@@ -41,9 +41,7 @@ const Cart = (props) => {
         {
           text: "Remove",
           style: "destructive",
-          onPress: () => props.removeFromCart(item), // works with your current reducer
-          // If your other version uses only the id:
-          // onPress: () => props.removeFromCart({ product: { _id: item.product._id } }),
+          onPress: () => props.removeFromCart(item),
         },
       ],
       { cancelable: true }
@@ -56,7 +54,7 @@ const Cart = (props) => {
         <>
           <SwipeListView
             contentContainerStyle={{
-              paddingHorizontal: 8,
+              paddingHorizontal: 5,
               paddingVertical: 12,
             }}
             data={props.cartItems}
@@ -67,12 +65,11 @@ const Cart = (props) => {
                   style={styles.hiddenButton}
                   onPress={() => confirmRemove(data.item)}
                 >
-                  <Icon name="trash" color={"red"} size={24} />
+                  <Icon name="trash" color={"white"} size={24} />
                 </TouchableOpacity>
               </View>
             )}
             disableRightSwipe={true}
-            previewOpenDelay={3000}
             friction={1000}
             tension={40}
             leftOpenValue={75}
@@ -142,17 +139,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     flexDirection: "row",
-    backgroundColor: "white",
-    borderRadius: 5,
-    marginBottom: 10,
-    overflow: "hidden",
+    borderBottomWidth: 1,
+    borderBottomColor: "#D4D4D8",
   },
   hiddenButton: {
     justifyContent: "center",
     alignItems: "flex-end",
     paddingRight: 25,
+    backgroundColor: "red",
     height: "100%",
-    width: 70,
+    width: 60,
   },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
